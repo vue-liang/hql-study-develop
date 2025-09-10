@@ -6,14 +6,12 @@ import com.liang.design.domain.RequestParameterTest;
 import com.liang.design.domain.ResultTest;
 import com.liang.design.tree.factory.TreeNodeFactory;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
-import java.util.concurrent.ThreadPoolExecutor;
 
 @Slf4j
 @Service
@@ -21,7 +19,6 @@ public class FirstNode extends AbstractMultiThreadStrategyRouter<RequestParamete
 
     @Resource
     private SecondNode secondNode;
-
 
     @Override
     protected void multiThread(RequestParameterTest requestParameterTest, TreeNodeFactory.DynamicContextTest dynamicContextTest) {

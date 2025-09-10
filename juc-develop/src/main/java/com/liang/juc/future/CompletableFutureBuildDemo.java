@@ -48,10 +48,10 @@ public class CompletableFutureBuildDemo {
     public static void main0(String[] args) throws ExecutionException, InterruptedException {
 
         ExecutorService executorService = Executors.newFixedThreadPool(3);
-//        ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(
-//                3,5,6,
-//                TimeUnit.SECONDS,new LinkedBlockingDeque<>(2)
-//        );
+        ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(
+                3,5,6L,
+                TimeUnit.SECONDS,new LinkedBlockingDeque<>(2)
+        );
         CompletableFuture<String> completableFuture = CompletableFuture.supplyAsync(() -> {
             System.out.println(Thread.currentThread().getName()+"----- 加入");
             try {TimeUnit.SECONDS.sleep(1);}catch (Exception e) {e.printStackTrace();}

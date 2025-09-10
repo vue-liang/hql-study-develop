@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.annotation.Resource;
 
 @SpringBootTest
-public class LinkTest {
+class LinkTest {
     @Resource
     private BusinessLinkedList<RequestParameterTest, LinkNodeFactory.DynamicContextTest, ResultTest> testFilter;
 
