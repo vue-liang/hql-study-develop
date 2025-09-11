@@ -1,10 +1,11 @@
 package com.liang.design.test;
 
+import com.liang.design.dynamic.CglibProxyFactory;
 import com.liang.design.dynamic.JdkProxyFactory;
 import com.liang.design.dynamic.TestService;
 import com.liang.design.dynamic.TestServiceImpl;
-import org.aopalliance.intercept.Invocation;
 import org.junit.jupiter.api.Test;
+import org.springframework.cglib.proxy.Enhancer;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
@@ -19,6 +20,11 @@ class DynamicTest {
 //            return res;
 //        });
         TestService proxy = (TestService) JdkProxyFactory.getProxy(new TestServiceImpl());
+        proxy.test();
+    }
+    @Test
+    void test02(){
+        TestService proxy = (TestService) CglibProxyFactory.getProxy(TestServiceImpl.class);
         proxy.test();
     }
 }
