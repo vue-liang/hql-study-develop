@@ -18,7 +18,7 @@ public class CompletableFutureAPIDemo {
             return 1;
         }).thenApply(f->{
             System.out.println("222");
-            if(f>0) throw new RuntimeException("故意的");
+//            if(f>0) throw new RuntimeException("故意的");
             return f+2;
         }).thenApply(f->{
             System.out.println("333");

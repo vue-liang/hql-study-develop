@@ -55,8 +55,7 @@ public class RpcBatchRequestTest {
                 .collect(Collectors.toList());
         // 在此处实现批量调用
 //        return ids.stream()
-//        .
-//                map(id -> CompletableFuture.supplyAsync(() -> rpcService.rpcGetDetailsById(id)))
+//                .map(id -> CompletableFuture.supplyAsync(() -> rpcService.rpcGetDetailsById(id)))
 //                .collect(Collectors.toList())
 //                .stream()
 //                .map(CompletableFuture::join)
