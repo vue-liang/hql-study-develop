@@ -14,24 +14,30 @@ import java.util.concurrent.locks.ReentrantLock;
 public class MyThreadPool {
     public static void main(String[] args) {
         MyThreadExecutor threadExecutor = new MyThreadExecutor
-                (4, 5, 1000, TimeUnit.MILLISECONDS,
-                        new MyBlockingQueue<>(1), (queue, task) -> {
+                (2, 3, 1000, TimeUnit.MILLISECONDS,
+                        new MyBlockingQueue<>(2), (queue, task) -> {
                     // 1. 死等
-//            queue.put(task);
+//                    queue.put(task);
                     // 2) 带超时等待
 //            queue.offer(task, 1500, TimeUnit.MILLISECONDS);
                     // 3) 让调用者放弃任务执行
-                    log.debug("放弃{}", task);
+//                    log.debug("放弃{}", task);
                     // 4) 让调用者抛出异常
 //            throw new RuntimeException("任务执行失败 " + task);
                     // 5) 让调用者自己执行任务
+//                    try {
+//                        Thread.sleep(3000L);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+                    log.debug("拒绝策略任务{}", task);
 //                    task.run();
                 });
         for (int i = 0; i < 8; i++) {
             int j = i;
             threadExecutor.execute(() -> {
                 try {
-                    Thread.sleep(3000L);
+                    Thread.sleep(1000L);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -50,17 +56,17 @@ class MyThreadExecutor {
 
     private final int corePoolSize;
 
-    private int maximumPoolSize;
+    private final int maximumPoolSize;
 
-    private long keepAliveTime;
+    private final long keepAliveTime;
 
-    private TimeUnit unit;
+    private final TimeUnit unit;
 
-    private MyBlockingQueue<Runnable> workQueue;
+    private final MyBlockingQueue<Runnable> workQueue;
 
-    private RejectedPolicy<Runnable> rejectedPolicy;
+    private final RejectedPolicy<Runnable> rejectedPolicy;
 
-    private HashSet<Worker> workers = new HashSet<>();
+    private final HashSet<Worker> workers = new HashSet<>();
 
     public MyThreadExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, MyBlockingQueue<Runnable> workQueue, RejectedPolicy<Runnable> rejectedPolicy) {
         this.corePoolSize = corePoolSize;
@@ -84,12 +90,12 @@ class MyThreadExecutor {
                 workers.add(worker);
                 worker.start();
             } else {
-                workQueue.tryPut(rejectedPolicy, task);
+                rejectedPolicy.reject(workQueue, task);
             }
         }
     }
 
-    private static AtomicInteger i = new AtomicInteger(0);
+    private static final AtomicInteger i = new AtomicInteger(0);
 
     private class Worker extends Thread {
 
@@ -244,13 +250,6 @@ class MyBlockingQueue<E> {
             return t;
         } finally {
             lock.unlock();
-        }
-    }
-
-    public void tryPut(RejectedPolicy<E> rejectedPolicy, E task) {
-        synchronized (queue) {
-            log.info("拒绝策略逻辑");
-            rejectedPolicy.reject(this, task);
         }
     }
 

@@ -18,6 +18,7 @@
         <module>leetcode-algorithm</module>
         <module>design-framework</module>
         <module>juc-develop</module>
+        <module>spring-learn</module>
     </modules>
 
     <properties>

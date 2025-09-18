@@ -14,9 +14,9 @@ public class LinkThirdNode implements ILogicHandler<RequestParameterTest, LinkNo
     public ResultTest apply(RequestParameterTest requestParameter, LinkNodeFactory.DynamicContextTest dynamicContext) throws Exception {
         log.info("第三个节点执行,设置上下文消息【{}】",requestParameter.getRequestParameterName()+requestParameter.getRequestParameterValue());
         dynamicContext.setMessage(requestParameter.getRequestParameterName() +":"+ requestParameter.getRequestParameterValue());
-        return next(requestParameter, dynamicContext);
-//        return ResultTest.builder()
-//                .result(dynamicContext.toString())
-//                .build();
+//        return next(requestParameter, dynamicContext);
+        return ResultTest.builder()
+                .result(dynamicContext.toString())
+                .build();
     }
 }

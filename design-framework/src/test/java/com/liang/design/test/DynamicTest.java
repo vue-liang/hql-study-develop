@@ -19,6 +19,7 @@ class DynamicTest {
 //            System.out.println("方法【"+method.getName()+"】调用之后");
 //            return res;
 //        });
+        ThreadLocal<String> t = new ThreadLocal<>();
         TestService proxy = (TestService) JdkProxyFactory.getProxy(new TestServiceImpl());
         proxy.test();
     }
