@@ -1,7 +1,8 @@
-package com.liang.bean;
+package com.liang.config;
 
+import com.liang.bean.TestBean;
+import com.liang.bean.UserContext;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
