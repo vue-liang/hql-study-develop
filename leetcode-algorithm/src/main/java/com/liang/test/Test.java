@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+// 计算众数（出现次数最多）并求最小的
 public class Test {
     public static void main(String[] args) {
         Test test = new Test();
