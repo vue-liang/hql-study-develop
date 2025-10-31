@@ -14,6 +14,7 @@ class RTest {
     @Test
     void contextLoads() {
         RLock lock = redisson.getLock("lock");
+        System.out.println("lock");
         boolean b = lock.tryLock();
         lock.unlock();
     }
