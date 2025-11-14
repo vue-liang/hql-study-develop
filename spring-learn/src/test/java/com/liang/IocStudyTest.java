@@ -1,8 +1,13 @@
 package com.liang;
 
+import com.liang.config.Config;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigUtils;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
@@ -35,5 +40,18 @@ public class IocStudyTest {
 //        Arrays.stream(beanDefinitionNames).forEach(System.out::println);
         Object testBean = applicationContext.getBean("testBean");
         System.out.println(testBean);
+    }
+
+    @Test
+    void testBeanFactory(){
+        // 创建BeanFactory
+        DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+        // Bean的定义 （class,scope,初始化，销毁等生命周期）
+        AbstractBeanDefinition beanDefinition = BeanDefinitionBuilder.genericBeanDefinition(Config.class).setScope("singleton").getBeanDefinition();
+        beanFactory.registerBeanDefinition("config",beanDefinition);
+        // 添加常用的后置处理器
+        AnnotationConfigUtils.registerAnnotationConfigProcessors(beanFactory);
+
+
     }
 }
