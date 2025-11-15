@@ -2,7 +2,9 @@ package com.liang;
 
 import com.liang.bean.Bean1;
 import com.liang.bean.Bean2;
+import com.liang.bean.TestBean;
 import com.liang.config.Config;
+import com.liang.utils.RegisterBeanUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -68,14 +70,28 @@ public class IocStudyTest {
                     System.out.println(">>>>" + beanPostProcessor);
                     beanFactory.addBeanPostProcessor(beanPostProcessor);
                 });
-
+        // 并不会初始化单例
         for (String name : beanFactory.getBeanDefinitionNames()) {
             System.out.println(name);
         }
         System.out.println("Bean1中的Bean2:"+beanFactory.getBean(Bean1.class).getBean2());
         System.out.println("Bean2中的Bean1:"+beanFactory.getBean(Bean2.class).getBean1());
-
-
-
+    }
+    @Resource
+    private RegisterBeanUtil registerBeanUtil;
+    @Test
+    void testBeanFactory1(){
+        int count = 3;
+        for (int i = 0; i < count; i++) {
+            registerBeanUtil.registerBean("testBean"+i, TestBean.class,new TestBean());
+        }
+        for (String beanDefinitionName : applicationContext.getBeanDefinitionNames()) {
+            if(beanDefinitionName.startsWith("test")){
+                System.out.println(beanDefinitionName);
+            }
+        }
+        for (int i = 0; i < count; i++) {
+            System.out.println(applicationContext.getBean("testBean"+i));
+        }
     }
 }

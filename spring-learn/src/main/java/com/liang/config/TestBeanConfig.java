@@ -31,9 +31,9 @@ public class TestBeanConfig implements BeanPostProcessor {
         userContext.setName("上下文测试Bean");
         return userContext;
     }
-    @Bean(initMethod = "initMethod",destroyMethod = "destroyMethod")
-    public TestBean testBean() {
-        System.out.println("-----------注册Bean-----------------");
-        return new TestBean();
-    }
+//    @Bean(initMethod = "initMethod",destroyMethod = "destroyMethod")
+//    public TestBean testBean() {
+//        System.out.println("-----------注册Bean-----------------");
+//        return new TestBean();
+//    }
 }
