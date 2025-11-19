@@ -1,6 +1,8 @@
 package com.liang;
 
 
+import com.alibaba.fastjson2.JSON;
+import com.liang.bean.Message;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
@@ -77,6 +79,32 @@ public class ApiTest {
         }
         br.close();
         log.info("测试响应值：{}",response);
+    }
+
+    @Test
+    public void test05() throws IOException {
+        URL url = new URL("http://localhost:8091/test/send");
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "application/json; utf-8");
+        conn.setRequestProperty("Accept", "application/json");
+        conn.setDoOutput(true);
+        Message message = new Message();
+        message.put("title","测试消息标题");
+        message.put("content","测试消息内容");
+        try(OutputStream os = conn.getOutputStream()){
+            os.write(JSON.toJSONString(message).getBytes(StandardCharsets.UTF_8));
+        }
+        StringBuilder response = new StringBuilder();
+        try(InputStream in = conn.getInputStream()){
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            String inputLine;
+            while((inputLine = br.readLine())!=null){
+                response.append(inputLine);
+            }
+            br.close();
+        }
+        log.info("响应信息：{}",response);
     }
 
     public String diff() throws IOException, InterruptedException {
