@@ -40,7 +40,7 @@ public class WeChatTest {
                 os.write(input, 0, input.length);
             }
 
-            try (Scanner scanner = new Scanner(conn.getInputStream(), StandardCharsets.UTF_8.name())) {
+            try (Scanner scanner = new Scanner(conn.getInputStream(), StandardCharsets.UTF_8)) {
                 String response = scanner.useDelimiter("\\A").next();
                 System.out.println(response);
             }

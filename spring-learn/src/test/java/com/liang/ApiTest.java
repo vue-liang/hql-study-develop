@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.*;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
@@ -20,15 +21,16 @@ public class ApiTest {
             dateFolder.mkdirs();
         }
         try (FileWriter writer = new FileWriter(file)){
-            writer.write("你这么厉害？");
+            writer.write("寒影决  ");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         try(OutputStream os = new FileOutputStream(file,true)){
-            os.write("你真厉害".getBytes(StandardCharsets.UTF_8));
+            os.write("攻敌三分，自留七分".getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        log.info("{}写入成功！",file.getAbsoluteFile());
     }
 
     @Test
@@ -43,6 +45,38 @@ public class ApiTest {
             os.write(diff.getBytes(StandardCharsets.UTF_8));
         }
         log.info("{}写入完毕",file.getAbsolutePath());
+    }
+    @Test
+    public void test03() throws IOException {
+        File file = new File("./src/test/java/files/test_diff.txt");
+        StringBuilder response = new StringBuilder("读取数据：");
+        try(FileReader fileReader = new FileReader(file)){
+            BufferedReader br = new BufferedReader(fileReader);
+            String inputLine;
+            while ((inputLine = br.readLine()) != null) {
+                response.append(inputLine).append("\n");
+            }
+            br.close();
+        }
+        log.info(String.valueOf(response));
+    }
+
+    @Test
+    public void test04() throws IOException {
+        // 1.初始化url
+        URL url = new URL("http://localhost:8091/test/data");
+        // 2.打开连接并设置请求方式
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        // 3.获取conn的输入流
+        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        String inputLine;
+        StringBuilder response = new StringBuilder();
+        while((inputLine=br.readLine())!=null){
+            response.append(inputLine).append("\n");
+        }
+        br.close();
+        log.info("测试响应值：{}",response);
     }
 
     public String diff() throws IOException, InterruptedException {
