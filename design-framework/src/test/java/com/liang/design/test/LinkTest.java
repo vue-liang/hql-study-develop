@@ -29,7 +29,7 @@ class LinkTest {
 
     @Test
     void test2() throws Exception {
-
+        System.out.println("测试github提交");
     }
 
 }
