@@ -1,12 +1,12 @@
-package com.liang.design.link.factory;
+package com.liang.design.link.model2.factory;
 
 import com.liang.design.domain.RequestParameterTest;
 import com.liang.design.domain.ResultTest;
-import com.liang.design.link.BusinessLinkedList;
-import com.liang.design.link.LinkedArmory;
-import com.liang.design.link.node.LinkFirstNode;
-import com.liang.design.link.node.LinkSecondNode;
-import com.liang.design.link.node.LinkThirdNode;
+import com.liang.design.link.model2.BusinessLinkedList;
+import com.liang.design.link.model2.LinkedArmory;
+import com.liang.design.link.model2.node.LinkFirstNode;
+import com.liang.design.link.model2.node.LinkSecondNode;
+import com.liang.design.link.model2.node.LinkThirdNode;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

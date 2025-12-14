@@ -9,7 +9,8 @@ public class MySort {
 //        insertSort(arr);
 //        selectSort(arr);
 //        quickSort(arr, 0, arr.length - 1);
-        quickSort1(arr, 0, arr.length - 1);
+//        quickSort1(arr, 0, arr.length - 1);
+        quickSort2(arr, 0, arr.length - 1);
         System.out.println(Arrays.toString(arr));
     }
 
@@ -96,6 +97,24 @@ public class MySort {
         arr[left] = key;
         quickSort1(arr, begin, left - 1);
         quickSort1(arr, left + 1, end);
+    }
+
+    // 快速排序
+    public static void quickSort2(int[] arr, int begin, int end) {
+        if (begin >= end) {
+            return;
+        }
+        int start = begin;
+        int key = arr[end];
+        for (int i = begin; i < end; i++) {
+            if (arr[i] < key) {
+                swap(arr, start, i);
+                start++;
+            }
+        }
+        swap(arr, start, end);
+        quickSort2(arr, begin, start - 1);
+        quickSort2(arr, start + 1, end);
     }
 
     private static void swap(int[] arr, int a, int b) {

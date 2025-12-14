@@ -1,4 +1,4 @@
-package com.liang.design.link;
+package com.liang.design.link.model2;
 
 import java.util.Arrays;
 

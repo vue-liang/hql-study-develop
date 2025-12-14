@@ -1,4 +1,4 @@
-package com.liang.design.link;
+package com.liang.design.link.model2;
 
 
 public class BusinessLinkedList<T,D,R> extends LinkedList<ILogicHandler<T,D,R>> implements ILogicHandler<T,D,R> {

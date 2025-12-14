@@ -24,6 +24,7 @@ public class RegisterBeanUtil {
                 .getBeanDefinition();
         // 如果Bean已存在，先移除
         if (beanFactory.containsBeanDefinition(beanName)) {
+            System.out.println(beanName+"已存在，现在更换新"+beanName);
             beanFactory.removeBeanDefinition(beanName);
         }
 

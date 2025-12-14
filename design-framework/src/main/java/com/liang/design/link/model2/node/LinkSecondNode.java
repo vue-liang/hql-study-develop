@@ -1,9 +1,9 @@
-package com.liang.design.link.node;
+package com.liang.design.link.model2.node;
 
 import com.liang.design.domain.RequestParameterTest;
 import com.liang.design.domain.ResultTest;
-import com.liang.design.link.ILogicHandler;
-import com.liang.design.link.factory.LinkNodeFactory;
+import com.liang.design.link.model2.ILogicHandler;
+import com.liang.design.link.model2.factory.LinkNodeFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

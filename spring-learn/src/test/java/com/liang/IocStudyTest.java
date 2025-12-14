@@ -85,6 +85,7 @@ public class IocStudyTest {
         for (int i = 0; i < count; i++) {
             registerBeanUtil.registerBean("testBean"+i, TestBean.class,new TestBean());
         }
+        registerBeanUtil.registerBean("testBean0", TestBean.class,new TestBean());
         for (String beanDefinitionName : applicationContext.getBeanDefinitionNames()) {
             if(beanDefinitionName.startsWith("test")){
                 System.out.println(beanDefinitionName);
