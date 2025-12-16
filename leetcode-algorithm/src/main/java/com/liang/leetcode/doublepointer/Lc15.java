@@ -2,6 +2,7 @@ package com.liang.leetcode.doublepointer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 // 三数之和
@@ -15,8 +16,11 @@ public class Lc15 {
         int l,r,sum;
         List<List<Integer>> res = new ArrayList<>();
         for (int i = 0; i<nums.length-2; i++){
-            if(nums[i]>0) break;
             if(i > 0 && nums[i] == nums[i-1]) continue; // 去重
+            sum = nums[i]+nums[i+1]+nums[i+2];
+            if(sum>0) break; // 已经大于0后续只会越来越大
+            sum = nums[i]+nums[nums.length-1]+nums[nums.length-2];
+            if(sum<0) continue; // 最大值已经小于0
             l = i+1;
             r = nums.length-1;
             while (l<r){
