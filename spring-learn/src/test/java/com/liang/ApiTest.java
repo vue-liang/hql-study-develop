@@ -8,15 +8,16 @@ import org.junit.jupiter.api.Test;
 
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Slf4j
 public class ApiTest {
     @Test
-    public void test01() throws IOException {
+    public void test_write_01() throws IOException {
         File file = new File("./src/test/java/files/test.txt");
         File dateFolder = new File("src/test/java/files");
         if (!dateFolder.exists()) {
@@ -36,7 +37,7 @@ public class ApiTest {
     }
 
     @Test
-    public void test02() throws IOException, InterruptedException {
+    public void test_write_02() throws IOException, InterruptedException {
         String diff = diff();
         File file = new File("./src/test/java/files/test_diff.txt");
         File dateFolder = new File("src/test/java/files");
@@ -49,7 +50,7 @@ public class ApiTest {
         log.info("{}写入完毕",file.getAbsolutePath());
     }
     @Test
-    public void test03() throws IOException {
+    public void test_read_03() throws IOException {
         File file = new File("./src/test/java/files/test_diff.txt");
         StringBuilder response = new StringBuilder("读取数据：");
         try(FileReader fileReader = new FileReader(file)){
@@ -105,6 +106,13 @@ public class ApiTest {
             br.close();
         }
         log.info("响应信息：{}",response);
+    }
+    @Test
+    public void test06(){
+        Set<Character> set = new HashSet<>(List.of('a','e','i','o','u'));
+        String s = "A man, a plan, a canal: Panama9281034";
+        String str = s.replaceAll("[^A-Za-z0-9]", "").toLowerCase();
+        log.info("测试字符串结果：{}",str);
     }
 
     public String diff() throws IOException, InterruptedException {
