@@ -16,8 +16,8 @@ public class ApiTest {
 
     @Test
     void test01(){
-        List<Integer> nums = new ArrayList<>(List.of(6, -1, 7, 4, 2, 3));
-        Collections.sort(nums);
+        List<Long> nums = new ArrayList<>(List.of(6L, -1L, 7L, 4L, 2L, 3L));
+        nums.sort((a, b) -> (int) (b - a));
         System.out.println("测试排序："+ nums);
     }
 
